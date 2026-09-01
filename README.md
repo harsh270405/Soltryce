@@ -29,7 +29,7 @@ A production-grade RAG (Retrieval-Augmented Generation) system for campus policy
               │ (LangGraph Agent) │  │  (PDF→Qdrant)   │
               └─────────┬─────────┘  └────────┬────────┘
                         │                     │
-         ┌──────────────▼─────────────────────▼──-────────────┐
+         ┌──────────────▼─────────────────────▼───────────────┐
          │                    RAG Pipeline                    │
          │                                                    │
          │  1. Query Classification (intent detection)        │
@@ -43,11 +43,11 @@ A production-grade RAG (Retrieval-Augmented Generation) system for campus policy
                                │
               ┌────────────────┼────────────────┐
               │                │                │
-     ┌────────▼──────┐ ┌────-──▼──────┐ ┌───────▼───────┐
+     ┌────────▼──────┐ ┌───────▼──────┐ ┌───────▼───────┐
      │   Qdrant DB   │ │  PostgreSQL  │ │   Redis       │
      │  (Vectors +   │ │  (Django +   │ │  (Celery      │
      │   Payloads)   │ │  Checkpoints)│ │   Broker)     │
-     └───────────────┘ └───────-──────┘ └───────────────┘
+     └───────────────┘ └──────────────┘ └───────────────┘
 ```
 
 ---
