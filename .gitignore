@@ -1,0 +1,76 @@
+# ── Python ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+.eggs/
+
+# ── Virtual environments ─────────────────────
+venv/
+.venv/
+env/
+
+# ── Django ───────────────────────────────────
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# ── Node / Frontend ──────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ── Build output ─────────────────────────────
+frontend/dist/
+frontend/dist-ssr/
+*.local
+
+# ── Docker ───────────────────────────────────
+docker-compose.override.yml
+
+# ── IDE / Editor ─────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ── OS ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Testing / Coverage ───────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.tox/
+
+# ── Logs ─────────────────────────────────────
+logs/
+*.log
+
+# ── Misc ─────────────────────────────────────
+.cache/
+*.bak
+*.tmp

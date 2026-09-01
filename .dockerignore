@@ -1,0 +1,37 @@
+# ── Git ───────────────────────────────────────
+.git
+.gitignore
+
+# ── Python ────────────────────────────────────
+__pycache__
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# ── Node / Frontend ──────────────────────────
+frontend/node_modules/
+frontend/dist/
+
+# ── IDE / Editor ─────────────────────────────
+.vscode/
+.idea/
+*.sw?
+
+# ── OS ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Environment / Secrets ────────────────────
+backend/.env
+
+# ── Docs / Misc ──────────────────────────────
+*.md
+LICENSE
+docker-compose*.yml
+.freebuff/
+venv/

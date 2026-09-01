@@ -1,0 +1,102 @@
+services:
+  db:
+    image: postgres:15
+    container_name: soltryce_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: soltryce_ai
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: soltryce_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: soltryce_qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  web:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: soltryce_web
+    command: bash start.sh
+    volumes:
+      - ./backend:/app
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      RUNNING_IN_DOCKER: "true"
+      DATABASE_URL: postgres://postgres:postgrespassword@db:5432/soltryce_ai
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/admin/')"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 15s
+
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: soltryce_celery
+    command: celery -A backend worker --loglevel=info
+    volumes:
+      - ./backend:/app
+      - media_volume:/app/media
+    env_file:
+      - ./backend/.env
+    environment:
+      RUNNING_IN_DOCKER: "true"
+      DATABASE_URL: postgres://postgres:postgrespassword@db:5432/soltryce_ai
+    depends_on:
+      - db
+      - redis
+      - web
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: soltryce_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      web:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  media_volume:

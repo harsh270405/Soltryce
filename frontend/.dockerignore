@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dist-ssr/
+.git/
+.gitignore
+README.md
+.vscode/
+.idea/
+*.sw?
+.DS_Store
+coverage/
+*.local
+.env
+.env.local
+.eslintcache
