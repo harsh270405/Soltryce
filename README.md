@@ -7,39 +7,39 @@ A production-grade RAG (Retrieval-Augmented Generation) system for campus policy
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        Frontend (React)                         │
-│         Dashboards · Chat · Scheduling · Rulebooks              │
-└──────────────────────────┬──────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│                        Frontend (React)                        │
+│         Dashboards · Chat · Scheduling · Rulebooks             │
+└──────────────────────────┬─────────────────────────────────────┘
                            │ JWT Auth
-┌──────────────────────────▼──────────────────────────────────────┐
-│                     Django REST API                             │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────────────────────┐   │
-│  │ Auth/JWT │  │ Request API  │  │ Knowledge Admin API      │   │
-│  │ RBAC     │  │ (queries)    │  │ (upload/manage PDFs)     │   │
-│  └──────────┘  └──────┬───────┘  └──────────┬───────────────┘   │
-│  ┌──────────┐  ┌──────┴───────┐  ┌──────────┴───────────────┐   │
-│  │   Labs   │  │ Clearances   │  │ Audit Log                │   │
-│  │ Booking  │  │              │  │                          │   │
-│  └──────────┘  └──────────────┘  └──────────────────────────┘   │
-└───────────────────────┼─────────────────────┼───────────────────┘
+┌──────────────────────────▼─────────────────────────────────────┐
+│                     Django REST API                            │
+│  ┌──────────┐  ┌──────────────┐  ┌──────────────────────────┐  │
+│  │ Auth/JWT │  │ Request API  │  │ Knowledge Admin API      │  │
+│  │ RBAC     │  │ (queries)    │  │ (upload/manage PDFs)     │  │
+│  └──────────┘  └──────┬───────┘  └──────────┬───────────────┘  │
+│  ┌──────────┐  ┌──────┴───────┐  ┌──────────┴───────────────┐  │
+│  │   Labs   │  │ Clearances   │  │ Audit Log                │  │
+│  │ Booking  │  │              │  │                          │  │
+│  └──────────┘  └──────────────┘  └──────────────────────────┘  │
+└───────────────────────┼─────────────────────┼──────────────────┘
                         │                     │
               ┌─────────▼─────────┐  ┌────────▼────────┐
               │   Celery Worker   │  │  Ingestion Task │
               │ (LangGraph Agent) │  │  (PDF→Qdrant)   │
               └─────────┬─────────┘  └────────┬────────┘
                         │                     │
-         ┌──────────────▼─────────────────────▼───────────────┐
-         │                    RAG Pipeline                    │
-         │                                                    │
-         │  1. Query Classification (intent detection)        │
-         │  2. Query Rewriting (normalization, expansion)     │
-         │  3. Hybrid Retrieval (Dense + BM25 + RRF)          │
-         │  4. Cross-Encoder Reranking                        │
-         │  5. Uncertainty Evaluation                         │
-         │  6. LLM Grounded Answer Generation                 │
-         │  7. Self-Reflection (quality verification)         │
-         └─────────────────────┬──────────────────────────────┘
+         ┌──────────────▼─────────────────────▼──────────────┐
+         │                    RAG Pipeline                   │
+         │                                                   │
+         │  1. Query Classification (intent detection)       │
+         │  2. Query Rewriting (normalization, expansion)    │
+         │  3. Hybrid Retrieval (Dense + BM25 + RRF)         │
+         │  4. Cross-Encoder Reranking                       │
+         │  5. Uncertainty Evaluation                        │
+         │  6. LLM Grounded Answer Generation                │
+         │  7. Self-Reflection (quality verification)        │
+         └─────────────────────┬─────────────────────────────┘
                                │
               ┌────────────────┼────────────────┐
               │                │                │
