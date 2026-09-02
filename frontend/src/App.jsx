@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   BookOpen, Bot, Calendar, ClipboardList, FileText, LogOut, Menu, Plus, Search, Send,
   Shield, ShieldCheck, UserRound, Users, Wrench, X, Zap, Clock, CheckCircle2,
-  AlertCircle, ArrowRight, Sparkles, TrendingUp, Eye, Sun, Moon, Settings,
+  AlertCircle, Sparkles, Sun, Moon, Settings,
 } from 'lucide-react'
 import API, { errorMessage } from './api'
 import ScheduleGrid from './components/ScheduleGrid'

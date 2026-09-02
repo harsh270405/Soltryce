@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 # Django API and authentication
 Django>=5.1,<7.0
 djangorestframework>=3.15,<4.0
@@ -14,19 +15,17 @@ psycopg[binary,pool]>=3.1.18,<4.0
 langgraph>=0.2,<2.0
 langgraph-checkpoint-postgres>=2.0,<4.0
 
-# RAG and model integrations
+# RAG ,model integrations, reranking and sparse retrieval
 langchain-core>=0.2,<2.0
 langchain-groq>=0.1,<2.0
 langchain-huggingface>=0.0.3,<2.0
 langchain-community>=0.2,<2.0
 langchain-text-splitters>=0.2,<2.0
+torch
 sentence-transformers>=3.0,<7.0
 qdrant-client>=1.10,<2.0
 pypdf>=4.2,<7.0
-
-# Advanced RAG: reranking and sparse retrieval
 rank-bm25>=0.2.2
-sentence-transformers>=3.0,<7.0
 
 # Text processing for keyword extraction
 jieba>=0.42.1

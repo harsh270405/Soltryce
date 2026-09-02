@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Calendar, Clock } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 
 export default function ScheduleGrid({ labs, bookings, onSlotClick, readOnly = false, selectedDate }) {
   const [hoveredSlot, setHoveredSlot] = useState(null)

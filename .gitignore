@@ -74,3 +74,7 @@ logs/
 .cache/
 *.bak
 *.tmp
+DEPLOYMENT.md
+LANGCHAIN_LANGGRAPH_ANALYSIS.md
+PROMPT_EMBEDDING_SWITCH.md
+prompt.md

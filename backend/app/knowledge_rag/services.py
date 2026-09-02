@@ -8,9 +8,7 @@ Advanced RAG Service with:
 """
 
 import logging
-import math
 import re
-from collections import defaultdict
 from typing import Optional
 
 import numpy as np
